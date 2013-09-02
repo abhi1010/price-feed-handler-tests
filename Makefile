@@ -56,6 +56,9 @@ b_client:
 b_regex:
 	g++ $(_GPPFLAGS) boost_regex_ex.cpp $(_BOOSTLIBS) $(_BOOSTFLAGS) -o b_regex.out
 
+b.lockfree:
+	g++ $(_GPPFLAGS) samplelockfree.cpp $(_BOOSTLIBS) $(_BOOSTFLAGS) -o b.lockfree.out
+
 
 clean:
 	rm -f *.out

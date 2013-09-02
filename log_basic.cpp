@@ -14,9 +14,9 @@
  *         http://www.crystalclearsoftware.com/cgi-bin/boost_wiki/wiki.pl?Boost.Logging
  */
 
-// #define BOOST_LOG_USE_CHAR
-//#define BOOST_ALL_DYN_LINK 1
-#define BOOST_LOG_DYN_LINK 1
+ #define BOOST_LOG_USE_CHAR
+ #define BOOST_ALL_DYN_LINK 1
+ #define BOOST_LOG_DYN_LINK 1
 
 #include <iostream>
 
@@ -79,7 +79,9 @@ int main(int argc, char* argv[])
 
     // The first thing we have to do to get using the library is
     // to set up the logging sinks - i.e. where the logs will be written to.
-    logging::add_console_log(std::clog, keywords::format = "%TimeStamp%: %Message%");
+    logging::add_console_log(std::clog, keywords::format = expr::stream 
+            << expr::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d, %H:%M:%S.%f")
+            << " --> " << expr::message );
 
     // One can also use lambda expressions to setup filters and formatters
     logging::add_file_log
@@ -106,6 +108,10 @@ int main(int argc, char* argv[])
     logging::add_common_attributes();
     logging::core::get()->add_thread_attribute("Scope", attrs::named_scope());
 
+
+    logging::core::get()->add_global_attribute("TimeStamp", attrs::local_clock());
+    //logging::core::get()->add_global_attribute("RecordID", attrs::counter< unsigned int >());
+
     BOOST_LOG_FUNCTION();
 
     // Now our logs will be written both to the console and to the file.
@@ -127,3 +133,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+

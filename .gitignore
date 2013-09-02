@@ -16,3 +16,15 @@
 *.out
 *.app
 /.project
+
+# Core files
+core
+
+
+# Log and text files
+*.log
+*.txt
+
+
+# Executables
+mcpub
