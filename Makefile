@@ -19,6 +19,9 @@ c: CXX='/home/dev/clang_3.2/bin/clang++'
 hello:
 	g++ $(_GPPFLAGS) hello_world.cpp  -lboost_system -lpthread -o hello.world.out
 
+sig:
+	g++ $(_GPPFLAGS) sigaction.cpp  -lboost_system -lpthread -o sig.out
+
 
 mcr:
 	g++ $(_GPPFLAGS) multicast_receiver.cpp  -lboost_system -lpthread -o mcr.out
